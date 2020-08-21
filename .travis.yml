@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk11
+jdk: oraclejdk9
 
 install: ./gradlew clean jar
 

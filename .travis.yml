@@ -3,4 +3,6 @@ jdk: oraclejdk9
 
 install: ./gradlew clean jar
 
-script: ./gradlew test
+script:
+  - ./gradlew test
+  - ./gradlew jacocoTestReport

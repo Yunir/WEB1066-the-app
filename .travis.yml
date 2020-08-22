@@ -29,6 +29,8 @@ install: ./gradlew clean jar
 
 script: COVERAGE=$CUSTOM_COVERAGE ./gradlew -p $MODULE_PATH check
 
+before_deploy: bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
+
 deploy:
   provider: script
   script: echo 'WIP'

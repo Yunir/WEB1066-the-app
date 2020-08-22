@@ -30,13 +30,11 @@ install: ./gradlew clean jar
 
 script: COVERAGE=$CUSTOM_COVERAGE ./gradlew -p $MODULE_PATH check
 
-before_deploy:
-  - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
-  - ./gradlew -p $MODULE_PATH packageToContainer
+before_deploy: ./gradlew -p $MODULE_PATH packageToContainer
 
 deploy:
   provider: script
-  script: echo 'WIP'
+  script: ./script/deploy.sh
   on:
     all_branches: true
     condition: "$ENABLE_DEPLOY = true"

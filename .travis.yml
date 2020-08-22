@@ -14,7 +14,7 @@ jobs:
       - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/repository/order
-      - CUSTOM_COVERAGE=0.39
+      - CUSTOM_COVERAGE=0.36
     - env:
       - MODULE_PATH=./monolithic/repository/cart
       - CUSTOM_COVERAGE=0.99

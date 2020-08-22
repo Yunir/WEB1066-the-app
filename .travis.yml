@@ -27,7 +27,7 @@ jobs:
 
 install: ./gradlew clean jar
 
-script: COVERAGE=$CUSTOM_COVERAGE ./gradlew $MODULE_PATH check
+script: COVERAGE=$CUSTOM_COVERAGE ./gradlew -p $MODULE_PATH check
 
 deploy:
   provider: script

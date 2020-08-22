@@ -5,29 +5,29 @@ jobs:
   include:
     - env:
       - MODULE_PATH=./monolithic/ui
-      - COVERAGE=0.99
+      - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/service/cart
-      - COVERAGE=0.99
+      - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/service/user
-      - COVERAGE=0.99
+      - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/repository/order
-      - COVERAGE=0.39
+      - CUSTOM_COVERAGE=0.39
     - env:
       - MODULE_PATH=./monolithic/repository/cart
-      - COVERAGE=0.99
+      - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/repository/product
-      - COVERAGE=0.99
+      - CUSTOM_COVERAGE=0.99
     - env:
       - MODULE_PATH=./monolithic/repository/user
-      - COVERAGE=0.31
+      - CUSTOM_COVERAGE=0.31
 
 install: ./gradlew clean jar
 
-script: $COVERAGE ./gradlew $MODULE_PATH check
+script: COVERAGE=$CUSTOM_COVERAGE ./gradlew $MODULE_PATH check
 
 deploy:
   provider: script

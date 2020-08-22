@@ -6,6 +6,7 @@ jobs:
     - env:
       - MODULE_PATH=./monolithic/ui
       - CUSTOM_COVERAGE=0.99
+      - ENABLE_DEPLOY=true
     - env:
       - MODULE_PATH=./monolithic/service/cart
       - CUSTOM_COVERAGE=0.99
@@ -29,8 +30,13 @@ install: ./gradlew clean jar
 
 script: COVERAGE=$CUSTOM_COVERAGE ./gradlew -p $MODULE_PATH check
 
-before_deploy: bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
+before_deploy:
+  - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
+  - ./gradlew -p $MODULE_PATH packageToContainer
 
 deploy:
   provider: script
   script: echo 'WIP'
+  on:
+    all_branches: true
+    condition: "$ENABLE_DEPLOY = true"

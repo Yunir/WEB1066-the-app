@@ -36,5 +36,5 @@ deploy:
   provider: script
   script: ./script/deploy.sh
   on:
-    all_branches: true
+    branch: master
     condition: "$ENABLE_DEPLOY = true"

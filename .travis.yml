@@ -1,15 +1,33 @@
 language: java
 jdk: oraclejdk9
 
+jobs:
+  include:
+    - env:
+      - MODULE_PATH=./monolithic/ui
+      - CUSTOM_COVERAGE=0.99
+    - env:
+      - MODULE_PATH=./monolithic/service/cart
+      - CUSTOM_COVERAGE=0.99
+    - env:
+      - MODULE_PATH=./monolithic/service/user
+      - CUSTOM_COVERAGE=0.99
+    - env:
+      - MODULE_PATH=./monolithic/repository/order
+      - CUSTOM_COVERAGE=0.36
+    - env:
+      - MODULE_PATH=./monolithic/repository/cart
+      - CUSTOM_COVERAGE=0.99
+    - env:
+      - MODULE_PATH=./monolithic/repository/product
+      - CUSTOM_COVERAGE=0.99
+    - env:
+      - MODULE_PATH=./monolithic/repository/user
+      - CUSTOM_COVERAGE=0.31
+
 install: ./gradlew clean jar
 
-script: ./gradlew test
-
-after_script:
-  - ./gradlew jacocoTestReport
-  - find . -name jacocoTestReport.csv | xargs cat | awk -F',' '{print $3" "$4" "$5}'
-
-before_deploy: COVERAGE=0.3 ./gradlew jacocoTestCoverageVerification
+script: COVERAGE=$CUSTOM_COVERAGE ./gradlew -p $MODULE_PATH check
 
 deploy:
   provider: script
